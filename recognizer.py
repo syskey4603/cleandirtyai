@@ -28,7 +28,7 @@ prediction.loadModel()
 print(os.path.join(execution_path, path_input))
 
 def genmap(coordlist):
-  
+  #print(coordlist)
   m = folium.Map(coordlist[0], zoom_start=13)
 
   tooltip = "Click me!"
@@ -49,9 +49,9 @@ def genmap(coordlist):
 
 
 # for camera takes 10 images checks for each
-def camrun(filename, resultcount):
+def camrun(filename, resultcount, picnum):
     cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)   
-    for x in range(0, 10):
+    for x in range(0, picnum):
         s, img = cam.read()
         if s:
             cv2.namedWindow("cam-test")
@@ -107,3 +107,34 @@ def previd(filename, vidname, resultcount):
             print(eachPrediction , " : " , eachProbability)
 
 
+def mainfunc():
+    print("Take pictures from camera type camera")
+    print("use pre-existing image type preimage")
+    print("use pre-existing video type prevideo")
+    choice = input("Choose an option: ")
+    resultcount = int(input("Number of predictions: "))
+
+
+    if(choice == "camera"):
+        camrun("camerafile.jpg", resultcount, 10)
+        continchoice()
+    elif(choice == "preimage"):
+        filename = input("enter file name of image include file type: ")
+        preimage(filename, resultcount)
+        continchoice()
+    elif(choice == "prevideo"):
+        vidfilename = input("enter file name of the video include file type: ")
+        previd("vidimg.jpg", vidfilename, resultcount)
+        continchoice()
+
+
+def continchoice():
+    choiceforcontinue = input("Do you want to continue? (y/n): ")
+
+    if(choiceforcontinue == "y"):
+        mainfunc()
+    else:
+        return
+    
+
+mainfunc()
