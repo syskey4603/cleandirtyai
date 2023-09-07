@@ -79,6 +79,18 @@ def preimage(filename, resultcount):
     predictions, probabilities = prediction.classifyImage(os.path.join(execution_path, filename), result_count=resultcount)
     for eachPrediction, eachProbability in zip(predictions, probabilities):
         print(eachPrediction , " : " , eachProbability)
+        if(eachPrediction == "dirty"):
+                g = geocoder.ip('me')
+                
+                
+                latlonglist = []
+                for z in range(0, len(g.latlng)):
+                    latlonglist.append(g.latlng[z])
+                coordlist.append(latlonglist)
+
+
+    if(coordlist != []):
+        genmap(coordlist)
 
 
 def previd(filename, vidname, resultcount):
@@ -105,6 +117,18 @@ def previd(filename, vidname, resultcount):
         predictions, probabilities = prediction.classifyImage(os.path.join(execution_path, filename), result_count=resultcount)
         for eachPrediction, eachProbability in zip(predictions, probabilities):
             print(eachPrediction , " : " , eachProbability)
+            if(eachPrediction == "dirty"):
+                g = geocoder.ip('me')
+                
+                
+                latlonglist = []
+                for z in range(0, len(g.latlng)):
+                    latlonglist.append(g.latlng[z])
+                coordlist.append(latlonglist)
+
+
+    if(coordlist != []):
+        genmap(coordlist)
 
 
 def mainfunc():
